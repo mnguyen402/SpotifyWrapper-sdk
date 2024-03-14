@@ -47,8 +47,8 @@ public class LoginFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
+        final EditText usernameEditText = binding.LoginUsername;
+        final EditText passwordEditText = binding.LoginPassword;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
 

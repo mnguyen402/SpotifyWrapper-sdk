@@ -47,9 +47,9 @@ public class RegisterFragment extends Fragment {
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
+        final EditText usernameEditText = binding.RegisterUsername;
+        final EditText passwordEditText = binding.RegisterPassword;
+        final Button loginButton = binding.register;
         final ProgressBar loadingProgressBar = binding.loading;
 
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
