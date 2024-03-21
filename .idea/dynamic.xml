@@ -11,6 +11,14 @@
               <option name="myProperties">
                 <set>
                   <DPropertyElement>
+                    <option name="name" value="redirectHostName" />
+                    <option name="static" value="false" />
+                    <option name="type" value="java.lang.String" />
+                    <option name="myType" value="java.lang.String" />
+                    <option name="myStatic" value="false" />
+                    <option name="myName" value="redirectHostName" />
+                  </DPropertyElement>
+                  <DPropertyElement>
                     <option name="name" value="redirectSchemeName" />
                     <option name="static" value="false" />
                     <option name="type" value="java.lang.String" />
