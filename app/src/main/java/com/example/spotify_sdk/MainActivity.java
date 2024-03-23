@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.spotify_sdk.ui.login.LoginFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         if (user == null) {
-            Intent intent = new Intent(getApplicationContext(), LoginFragment.class);
+            Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
         }
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), LoginFragment.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
                 finish();
             }
