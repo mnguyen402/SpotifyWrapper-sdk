@@ -27,7 +27,7 @@ public class Register extends AppCompatActivity {
     FirebaseAuth mAuth;
     TextView textView;
     EditText usernameEditText, passwordEditText;
-    Button ButtonReg;
+    TextView ButtonReg;
     ProgressBar ProgressBar;
 
     @Override
@@ -37,7 +37,7 @@ public class Register extends AppCompatActivity {
 
         usernameEditText = findViewById(R.id.Register_Username);
         passwordEditText = findViewById(R.id.Register_Password);
-        ButtonReg = findViewById(R.id.register);
+        ButtonReg = findViewById(R.id.Register);
         textView = findViewById(R.id.loginNow);
         mAuth = FirebaseAuth.getInstance();
         ProgressBar = findViewById(R.id.progressBar);
@@ -49,12 +49,13 @@ public class Register extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-    });
+        });
 
         ButtonReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ProgressBar.setVisibility(View.VISIBLE);
+                Toast.makeText(Register.this, "Registration Successful.", Toast.LENGTH_SHORT).show();
                 mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
                                 passwordEditText.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

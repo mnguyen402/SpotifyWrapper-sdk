@@ -67,13 +67,10 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
-
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-
                 mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
                                 passwordEditText.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
