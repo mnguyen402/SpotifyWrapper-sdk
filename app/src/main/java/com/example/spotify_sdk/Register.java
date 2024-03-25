@@ -55,7 +55,6 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProgressBar.setVisibility(View.VISIBLE);
-                Toast.makeText(Register.this, "Registration Successful.", Toast.LENGTH_SHORT).show();
                 mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
                                 passwordEditText.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
