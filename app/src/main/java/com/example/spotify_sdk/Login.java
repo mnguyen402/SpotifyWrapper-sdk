@@ -71,44 +71,26 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                mAuth.createUserWithEmailAndPassword(usernameEditText.getText().toString(),
-                                passwordEditText.getText().toString())
+                mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(),
+                                                passwordEditText.getText().toString())
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 loadingProgressBar.setVisibility(View.GONE);
-                                if (TextUtils.isEmpty(usernameEditText.getText().toString())) {
-                                    Toast.makeText(Login.this, "Enter email",
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(getApplicationContext(), "Login Successful.",
                                             Toast.LENGTH_SHORT).show();
-                                    return;
-                                } if (TextUtils.isEmpty(passwordEditText.getText().toString())) {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(Login.this, "Enter password",
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Toast.makeText(Login.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-                                    return;
                                 }
-
-                                mAuth.signInWithEmailAndPassword(usernameEditText.getText().toString(),
-                                                passwordEditText.getText().toString())
-                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                                loadingProgressBar.setVisibility(View.GONE);
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(getApplicationContext(), "Login Successful.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                    startActivity(intent);
-                                                    finish();
-                                                } else {
-                                                    Toast.makeText(Login.this, "Authentication failed.",
-                                                            Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-
                             }
                         });
+
+
             }
         });
     }
