@@ -51,12 +51,11 @@ public class Register extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         ProgressBar = findViewById(R.id.progressBar);
         textView = findViewById(R.id.loginNow);
+        db = FirebaseFirestore.getInstance();
 
         textView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
+
             }
         });
 
@@ -70,8 +69,18 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 ProgressBar.setVisibility(View.GONE);
+                                Map<String, Object> user = new HashMap<>();
                                 if (task.isSuccessful()) {
-                                    db.collection("users").document(mAuth.getUid().toString());
+                                    db.collection("users")
+                                            .document(mAuth.getUid())
+                                            .set(user)
+                                            .addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(Register.this, e.getMessage(),
+                                                            Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                     Toast.makeText(Register.this, "Registration Successful.", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(Register.this, "Registration failed: " + task.getException().getMessage(),
@@ -79,12 +88,7 @@ public class Register extends AppCompatActivity {
                                 }
                             }
                         });
-
             }
         });
-
-
-
-
     }
 }
