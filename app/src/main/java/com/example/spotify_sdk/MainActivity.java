@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button button;
-    TextView textView;
+    TextView textView, summaryButton;
     FirebaseUser user;
     FirebaseFirestore db;
 
@@ -30,19 +30,28 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
+        summaryButton = findViewById(R.id.SummaryButton);
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
             finish();
         }
         else {
-            textView.setText(user.getEmail());
+            textView.setText(user.getEmail() + "\n" + "My mind telling me no");
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), Login.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        summaryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SummaryActivity.class);
                 startActivity(intent);
                 finish();
             }
