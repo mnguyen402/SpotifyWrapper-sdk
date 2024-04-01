@@ -13,4 +13,7 @@
     <string name="click_to_login">Click to login</string>
     <string name="click_to_register">Click to Register</string>
     <string name="logout">Logout</string>
+    <string name="get_user_profile">Get User Profile</string>
+    <string name="request_code">Request Code</string>
+    <string name="request_token">Request Token</string>
 </resources>

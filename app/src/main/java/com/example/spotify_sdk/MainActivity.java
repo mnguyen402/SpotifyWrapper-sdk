@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     Button button;
-    TextView textView, summaryButton;
+    TextView textView, summaryButton, spotifyLoginButton;
     FirebaseUser user;
     FirebaseFirestore db;
 
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         user = auth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
         summaryButton = findViewById(R.id.SummaryButton);
+        spotifyLoginButton = findViewById(R.id.SpotifyLogin);
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
@@ -52,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), SummaryActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+        spotifyLoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ApiActivity.class);
                 startActivity(intent);
                 finish();
             }
