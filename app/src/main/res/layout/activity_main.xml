@@ -15,6 +15,22 @@
         android:text="Hello World!" />
 
     <TextView
+        android:id="@+id/userButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/metallic_gold"
+        android:text="Manage User Information"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/SpotifyLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/metallic_gold"
+        android:text="Spotify Login"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/SummaryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

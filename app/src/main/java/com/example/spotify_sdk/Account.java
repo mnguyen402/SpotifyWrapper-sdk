@@ -17,18 +17,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Account extends AppCompatActivity {
     FirebaseUser user;
-    TextView deleteAButton, changeEmailButton, changePasswordButton;
-    EditText changeEmailText, changePasswordText;
+    TextView deleteAButton, changePasswordButton, backButton;
+    EditText changePasswordText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         user = FirebaseAuth.getInstance().getCurrentUser();
         deleteAButton = findViewById(R.id.DeleteAccountButton);
-        changeEmailButton = findViewById(R.id.ChangeEmailButton);
         changePasswordButton = findViewById(R.id.changePasswordButton);
-        changeEmailText = findViewById(R.id.editEmail);
         changePasswordText = findViewById(R.id.editPassword);
+        backButton = findViewById(R.id.backButtonAccount);
         deleteAButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 user.delete()
@@ -37,22 +36,10 @@ public class Account extends AppCompatActivity {
                             public void onComplete(Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(getApplicationContext(), "Delete Successful.", Toast.LENGTH_SHORT).show();
+                                    FirebaseAuth.getInstance().signOut();
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
                                     startActivity(intent);
                                     finish();
-                                }
-                            }
-                        });
-            }
-        });
-        changeEmailButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                user.updateEmail(changeEmailText.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete( Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), "User email address updated.", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
@@ -71,6 +58,12 @@ public class Account extends AppCompatActivity {
                         });
             }
         });
-
+        backButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
