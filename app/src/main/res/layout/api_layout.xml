@@ -73,6 +73,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Get Top Song" />
+
+        <Button
+            android:id="@+id/spotifyWrapperBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spotify Wrapper" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

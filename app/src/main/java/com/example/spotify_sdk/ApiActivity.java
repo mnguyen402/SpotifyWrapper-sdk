@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Looper;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class ApiActivity extends AppCompatActivity {
     private Handler mainHandler;
     private Request request;
     private StringBuilder builder;
+    private String top;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +66,7 @@ public class ApiActivity extends AppCompatActivity {
         Button codeBtn = (Button) findViewById(R.id.code_btn);
         Button profileBtn = (Button) findViewById(R.id.profile_btn);
         Button topSongBtn = findViewById(R.id.topSongbutton);
+        Button spotifyWrapperBtn = findViewById(R.id.spotifyWrapperBtn);
 
         // Set the click listeners for the buttons
 
@@ -75,12 +78,23 @@ public class ApiActivity extends AppCompatActivity {
             getCode();
         });
 
+        spotifyWrapperBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ApiActivity.this, SpotifyWrapperActivity.class);
+                intent.putExtra("topSong", ((TextView) findViewById(R.id.getTopSongTextView)).getText().toString());
+                intent.putExtra("topArtist", ((TextView) findViewById(R.id.response_text_view)).getText().toString());
+                startActivity(intent);
+            }
+        });
+
         profileBtn.setOnClickListener((v) -> {
             request = new Request.Builder()
                     .url("https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5&offset=0")
                     .addHeader("Authorization", "Bearer " + mAccessToken)
                     .build();
             profileTextView = findViewById(R.id.response_text_view);
+            top = "Top Artists";
             onGetTopStatsClicked();
         });
         topSongBtn.setOnClickListener((v) -> {
@@ -88,6 +102,7 @@ public class ApiActivity extends AppCompatActivity {
                     .addHeader("Authorization", "Bearer " + mAccessToken)
                     .build();
             profileTextView = findViewById(R.id.getTopSongTextView);
+            top = "Top Song";
             onGetTopStatsClicked();
         });
     }
@@ -128,12 +143,13 @@ public class ApiActivity extends AppCompatActivity {
                     Log.d(TAG, "Response Body: " + responseBodyString); // Log the entire response body
                     JSONObject responseObject = new JSONObject(responseBodyString);
                     JSONArray itemsArray = responseObject.getJSONArray("items");
-
+                    builder.append(top);
+                    builder.append("\n\n");
                     for (int i = 0; i < itemsArray.length(); i++) {
                         JSONObject artistObject = itemsArray.getJSONObject(i);
                         String artistName = artistObject.getString("name");
                         //JSONArray genresArray = artistObject.getJSONArray("name");
-                        builder.append(artistName);
+                        builder.append((i+1)+". ").append(artistName);
                     //.append("\nGenres: ");
 
                         //for (int j = 0; j < genresArray.length(); j++) {
