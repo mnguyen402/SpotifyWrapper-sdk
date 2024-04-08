@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            tools:text="Line 1\nLine 2\nLine 3" />
+            tools:text="Line 1\nLine 2\nLine 3\nLine 4\n" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,8 +58,21 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="8dp"
                 android:layout_weight="1"
-                android:text="Get User Profile" />
+                android:text="Get Artist" />
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/getTopSongTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Line 1\nLine 2\nLine 3\nLine 4\n"
+            android:textSize="10sp" />
+
+        <Button
+            android:id="@+id/topSongbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Top Song" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

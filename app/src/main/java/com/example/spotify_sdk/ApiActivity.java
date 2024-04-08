@@ -2,7 +2,7 @@ package com.example.spotify_sdk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
@@ -44,7 +44,8 @@ public class ApiActivity extends AppCompatActivity {
     private static final String TAG = ApiActivity.class.getSimpleName();
 
     private Handler mainHandler;
-
+    private Request request;
+    private StringBuilder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +63,7 @@ public class ApiActivity extends AppCompatActivity {
         Button tokenBtn = (Button) findViewById(R.id.token_btn);
         Button codeBtn = (Button) findViewById(R.id.code_btn);
         Button profileBtn = (Button) findViewById(R.id.profile_btn);
+        Button topSongBtn = findViewById(R.id.topSongbutton);
 
         // Set the click listeners for the buttons
 
@@ -74,9 +76,20 @@ public class ApiActivity extends AppCompatActivity {
         });
 
         profileBtn.setOnClickListener((v) -> {
+            request = new Request.Builder()
+                    .url("https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5&offset=0")
+                    .addHeader("Authorization", "Bearer " + mAccessToken)
+                    .build();
+            profileTextView = findViewById(R.id.response_text_view);
             onGetTopStatsClicked();
         });
-
+        topSongBtn.setOnClickListener((v) -> {
+            request = new Request.Builder().url("https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=medium_term&locale=en-US%2Cen%3Bq%3D0.9")
+                    .addHeader("Authorization", "Bearer " + mAccessToken)
+                    .build();
+            profileTextView = findViewById(R.id.getTopSongTextView);
+            onGetTopStatsClicked();
+        });
     }
 
 
@@ -87,14 +100,8 @@ public class ApiActivity extends AppCompatActivity {
         }
 
         // Create a request to get the user profile
-        final Request request = new Request.Builder()
-                .url("https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5&offset=0")
-                .addHeader("Authorization", "Bearer " + mAccessToken)
-                .build();
-
         cancelCall();
         mCall = mOkHttpClient.newCall(request);
-
         mCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -114,7 +121,7 @@ public class ApiActivity extends AppCompatActivity {
                     return;
                 }
 
-                final StringBuilder builder = new StringBuilder();
+                builder = new StringBuilder();
 
                 try {
                     String responseBodyString = response.body().string(); // Get the response body as string
@@ -125,21 +132,21 @@ public class ApiActivity extends AppCompatActivity {
                     for (int i = 0; i < itemsArray.length(); i++) {
                         JSONObject artistObject = itemsArray.getJSONObject(i);
                         String artistName = artistObject.getString("name");
-                        JSONArray genresArray = artistObject.getJSONArray("genres");
+                        //JSONArray genresArray = artistObject.getJSONArray("name");
+                        builder.append(artistName);
+                    //.append("\nGenres: ");
 
-                        builder.append("Artist: ").append(artistName).append("\nGenres: ");
-
-                        for (int j = 0; j < genresArray.length(); j++) {
-                            builder.append(genresArray.getString(j));
-                            if (j < genresArray.length() - 1) {
-                                builder.append(", ");
-                            }
-                        }
+                        //for (int j = 0; j < genresArray.length(); j++) {
+                          //  builder.append(genresArray.getString(j));
+                            //if (j < genresArray.length() - 1) {
+                               // builder.append(", ");
+                           // }
+                        //}
                         builder.append("\n\n"); // Separate each artist's info
                     }
 
                     mainHandler.post(() -> {
-                        profileTextView.setText(builder.toString());
+                            profileTextView.setText(builder.toString());
                     });
 
                 } catch (JSONException e) {
