@@ -77,7 +77,7 @@ public class ApiActivity extends AppCompatActivity {
 
                 Runnable checkAndStartActivity = () -> {
                     if (isArtistsFetched[0] && isSongsFetched[0]) {
-                        mainHandler.post(() -> startSpotifyWrapperActivity());
+                        startSpotifyWrapperActivity();
                     }
                 };
 
@@ -108,7 +108,7 @@ public class ApiActivity extends AppCompatActivity {
 
                 Runnable checkAndStartActivity = () -> {
                     if (isArtistsFetched[0] && isSongsFetched[0]) {
-                        mainHandler.post(() -> startSpotifyWrapperActivity());
+                        startSpotifyWrapperActivity();
                     }
                 };
 
@@ -139,7 +139,7 @@ public class ApiActivity extends AppCompatActivity {
 
                 Runnable checkAndStartActivity = () -> {
                     if (isArtistsFetched[0] && isSongsFetched[0]) {
-                        mainHandler.post(() -> startSpotifyWrapperActivity());
+                        startSpotifyWrapperActivity();
                     }
                 };
 
@@ -191,7 +191,7 @@ public class ApiActivity extends AppCompatActivity {
                 // Process the response for top artists
                 String responseBodyString = response.body().string(); // Get the response body as a string
                 mainHandler.post(() -> {
-                    onGetTopStatsClicked(responseBodyString, artistTextView);
+                    onGetTopStatsClicked(responseBodyString, artistTextView, "Top Artists");
                 });
                 fetchTopSongs(timeRange, onSuccess); // Call fetchTopSongs() after successful completion of fetchTopArtists()
             }
@@ -226,23 +226,23 @@ public class ApiActivity extends AppCompatActivity {
                 // Process the response for top songs
                 String responseBodyString = response.body().string(); // Get the response body as a string
                 mainHandler.post(() -> {
-                    onGetTopStatsClicked(responseBodyString, songTextView); // Pass the response body and the target TextView for songs
+                    onGetTopStatsClicked(responseBodyString, songTextView, "Top Songs"); // Pass the response body and the target TextView for songs
                 });
             }
         });
     }
 
-    public void onGetTopStatsClicked(String responseBodyString, TextView targetTextView) {
+    public void onGetTopStatsClicked(String responseBodyString, TextView targetTextView, String title) {
         try {
             JSONObject responseObject = new JSONObject(responseBodyString);
             JSONArray itemsArray = responseObject.getJSONArray("items");
-            StringBuilder builder = new StringBuilder(top).append("\n\n");
+            StringBuilder builder = new StringBuilder(title).append("\n\n"); // Use the title parameter here
             for (int i = 0; i < itemsArray.length(); i++) {
                 JSONObject itemObject = itemsArray.getJSONObject(i);
                 String name = itemObject.getString("name");
                 builder.append(i + 1).append(". ").append(name).append("\n\n");
             }
-            targetTextView.setText(builder.toString());
+            mainHandler.post(() -> targetTextView.setText(builder.toString())); // Ensure UI updates are posted to the main thread
         } catch (JSONException e) {
             Log.e(TAG, "Failed to parse data: " + e);
             Toast.makeText(getApplicationContext(), "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
