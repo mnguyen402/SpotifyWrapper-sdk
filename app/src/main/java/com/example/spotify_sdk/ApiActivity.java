@@ -41,7 +41,7 @@ public class ApiActivity extends AppCompatActivity {
     private final OkHttpClient mOkHttpClient = new OkHttpClient();
     private String mAccessToken, mAccessCode;
     private Call mCall;
-    private TextView tokenTextView, codeTextView, profileTextView;
+    private TextView tokenTextView, codeTextView, profileTextView, getTopSongTextView;
     private static final String TAG = ApiActivity.class.getSimpleName();
 
     private Handler mainHandler;
@@ -58,17 +58,28 @@ public class ApiActivity extends AppCompatActivity {
 
         // Initialize the views
         profileTextView = (TextView) findViewById(R.id.response_text_view);
+        getTopSongTextView = findViewById(R.id.getTopSongTextView);
 
         // Initialize the buttons
         Button spotifyWrapperBtnShort = findViewById(R.id.spotifyWrapperBtnShort);
         Button spotifyWrapperBtnMed = findViewById(R.id.spotifyWrapperBtnMed);
         Button spotifyWrapperBtnLong = findViewById(R.id.spotifyWrapperBtnLong);
+        Button spotifyWrapperBtn = findViewById(R.id.SpotifyWrapperBtn);
 
         // Set the click listeners for the buttons
         mainHandler.postDelayed(() -> {
             getToken();
         }, 500);
 
+        spotifyWrapperBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SpotifyWrapperActivity.class);
+                intent.putExtra("topArtist",profileTextView.getText().toString());
+                intent.putExtra("topSong",getTopSongTextView.getText().toString());
+                startActivity(intent);
+                finish();
+            }
+        });
         spotifyWrapperBtnShort.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 

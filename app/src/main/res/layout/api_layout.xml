@@ -50,6 +50,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="1 Year Spotify Wrapped" />
+
+        <Button
+            android:id="@+id/SpotifyWrapperBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spotify Wrapper" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
