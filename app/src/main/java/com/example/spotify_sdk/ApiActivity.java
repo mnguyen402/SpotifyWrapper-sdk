@@ -57,30 +57,42 @@ public class ApiActivity extends AppCompatActivity {
         mainHandler = new Handler(Looper.getMainLooper());
 
         // Initialize the views
-        tokenTextView = (TextView) findViewById(R.id.token_text_view);
-        codeTextView = (TextView) findViewById(R.id.code_text_view);
         profileTextView = (TextView) findViewById(R.id.response_text_view);
 
         // Initialize the buttons
-        Button tokenBtn = (Button) findViewById(R.id.token_btn);
-        Button codeBtn = (Button) findViewById(R.id.code_btn);
-        Button profileBtn = (Button) findViewById(R.id.profile_btn);
-        Button topSongBtn = findViewById(R.id.topSongbutton);
-        Button spotifyWrapperBtn = findViewById(R.id.spotifyWrapperBtn);
+        Button spotifyWrapperBtnShort = findViewById(R.id.spotifyWrapperBtnShort);
+        Button spotifyWrapperBtnMed = findViewById(R.id.spotifyWrapperBtnMed);
+        Button spotifyWrapperBtnLong = findViewById(R.id.spotifyWrapperBtnLong);
 
         // Set the click listeners for the buttons
-
-        tokenBtn.setOnClickListener((v) -> {
+        mainHandler.postDelayed(() -> {
             getToken();
-        });
+        }, 500);
 
-        codeBtn.setOnClickListener((v) -> {
-            getCode();
-        });
-
-        spotifyWrapperBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
+        spotifyWrapperBtnShort.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+                final boolean[] isArtistsFetched = {false};
+                final boolean[] isSongsFetched = {false};
+
+                Runnable checkAndStartActivity = () -> {
+                    if (isArtistsFetched[0] && isSongsFetched[0]) {
+                        startSpotifyWrapperActivity();
+                    }
+                };
+
+                fetchTopArtists("short_term", () -> {
+                    isArtistsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+
+                fetchTopSongs("short_term", () -> {
+                    isSongsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+            }
+
+            private void startSpotifyWrapperActivity() {
                 Intent intent = new Intent(ApiActivity.this, SpotifyWrapperActivity.class);
                 intent.putExtra("topSong", ((TextView) findViewById(R.id.getTopSongTextView)).getText().toString());
                 intent.putExtra("topArtist", ((TextView) findViewById(R.id.response_text_view)).getText().toString());
@@ -88,92 +100,155 @@ public class ApiActivity extends AppCompatActivity {
             }
         });
 
-        profileBtn.setOnClickListener((v) -> {
-            request = new Request.Builder()
-                    .url("https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=5&offset=0")
-                    .addHeader("Authorization", "Bearer " + mAccessToken)
-                    .build();
-            profileTextView = findViewById(R.id.response_text_view);
-            top = "Top Artists";
-            onGetTopStatsClicked();
+        spotifyWrapperBtnMed.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                final boolean[] isArtistsFetched = {false};
+                final boolean[] isSongsFetched = {false};
+
+                Runnable checkAndStartActivity = () -> {
+                    if (isArtistsFetched[0] && isSongsFetched[0]) {
+                        startSpotifyWrapperActivity();
+                    }
+                };
+
+                fetchTopArtists("medium_term", () -> {
+                    isArtistsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+
+                fetchTopSongs("medium_term", () -> {
+                    isSongsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+            }
+
+            private void startSpotifyWrapperActivity() {
+                Intent intent = new Intent(ApiActivity.this, SpotifyWrapperActivity.class);
+                intent.putExtra("topSong", ((TextView) findViewById(R.id.getTopSongTextView)).getText().toString());
+                intent.putExtra("topArtist", ((TextView) findViewById(R.id.response_text_view)).getText().toString());
+                startActivity(intent);
+            }
         });
-        topSongBtn.setOnClickListener((v) -> {
-            request = new Request.Builder().url("https://api.spotify.com/v1/me/top/tracks?limit=5&time_range=medium_term&locale=en-US%2Cen%3Bq%3D0.9")
-                    .addHeader("Authorization", "Bearer " + mAccessToken)
-                    .build();
-            profileTextView = findViewById(R.id.getTopSongTextView);
-            top = "Top Song";
-            onGetTopStatsClicked();
+
+        spotifyWrapperBtnLong.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                final boolean[] isArtistsFetched = {false};
+                final boolean[] isSongsFetched = {false};
+
+                Runnable checkAndStartActivity = () -> {
+                    if (isArtistsFetched[0] && isSongsFetched[0]) {
+                        startSpotifyWrapperActivity();
+                    }
+                };
+
+                fetchTopArtists("long_term", () -> {
+                    isArtistsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+
+                fetchTopSongs("long_term", () -> {
+                    isSongsFetched[0] = true;
+                    checkAndStartActivity.run();
+                });
+            }
+
+            private void startSpotifyWrapperActivity() {
+                Intent intent = new Intent(ApiActivity.this, SpotifyWrapperActivity.class);
+                intent.putExtra("topSong", ((TextView) findViewById(R.id.getTopSongTextView)).getText().toString());
+                intent.putExtra("topArtist", ((TextView) findViewById(R.id.response_text_view)).getText().toString());
+                startActivity(intent);
+            }
         });
     }
 
+    private void fetchTopArtists(String timeRange, Runnable onSuccess) {
+        String url = "https://api.spotify.com/v1/me/top/artists?time_range=" + timeRange + "&limit=5&offset=0";
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
+        TextView artistTextView = findViewById(R.id.response_text_view); // The TextView for artists
+        top = "Top Artists";
 
-    public void onGetTopStatsClicked() {
-        if (mAccessToken == null) {
-            Toast.makeText(getApplicationContext(), "You need to get an access token first!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        // Create a request to get the user profile
-        cancelCall();
         mCall = mOkHttpClient.newCall(request);
         mCall.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.d("HTTP", "Failed to fetch data: " + e);
-                Toast.makeText(getApplicationContext(), "Failed to fetch data, watch Logcat for more details",
-                        Toast.LENGTH_SHORT).show();
+                Log.d("HTTP", "Failed to fetch top artists data: " + e);
+                mainHandler.post(() -> Toast.makeText(getApplicationContext(), "Failed to fetch top artists data, watch Logcat for more details", Toast.LENGTH_SHORT).show());
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (!response.isSuccessful()) {
-                    Log.e(TAG, "Server error: " + response + " Message: " + response.message());
-                    String errorMessage = response.body() != null ? response.body().string() : "Unknown error";
-                    mainHandler.post(() -> {
-                        Toast.makeText(getApplicationContext(), "Error fetching data: " + errorMessage, Toast.LENGTH_SHORT).show();
-                    });
+                    Log.e(TAG, "Server error: " + response);
+                    mainHandler.post(() -> Toast.makeText(getApplicationContext(), "Error fetching top artists data", Toast.LENGTH_SHORT).show());
                     return;
                 }
 
-                builder = new StringBuilder();
-
-                try {
-                    String responseBodyString = response.body().string(); // Get the response body as string
-                    Log.d(TAG, "Response Body: " + responseBodyString); // Log the entire response body
-                    JSONObject responseObject = new JSONObject(responseBodyString);
-                    JSONArray itemsArray = responseObject.getJSONArray("items");
-                    builder.append(top);
-                    builder.append("\n\n");
-                    for (int i = 0; i < itemsArray.length(); i++) {
-                        JSONObject artistObject = itemsArray.getJSONObject(i);
-                        String artistName = artistObject.getString("name");
-                        //JSONArray genresArray = artistObject.getJSONArray("name");
-                        builder.append((i+1)+". ").append(artistName);
-                    //.append("\nGenres: ");
-
-                        //for (int j = 0; j < genresArray.length(); j++) {
-                          //  builder.append(genresArray.getString(j));
-                            //if (j < genresArray.length() - 1) {
-                               // builder.append(", ");
-                           // }
-                        //}
-                        builder.append("\n\n"); // Separate each artist's info
-                    }
-
-                    mainHandler.post(() -> {
-                            profileTextView.setText(builder.toString());
-                    });
-
-                } catch (JSONException e) {
-                    Log.e(TAG, "Failed to parse data: " + e);
-                    mainHandler.post(() -> {
-                        Toast.makeText(getApplicationContext(), "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
-                    });
-                }
+                // Process the response for top artists
+                String responseBodyString = response.body().string(); // Get the response body as a string
+                mainHandler.post(() -> {
+                    onGetTopStatsClicked(responseBodyString, artistTextView, "Top Artists");
+                });
+                fetchTopSongs(timeRange, onSuccess); // Call fetchTopSongs() after successful completion of fetchTopArtists()
             }
         });
     }
+
+    private void fetchTopSongs(String timeRange, Runnable onSuccess) {
+        String url = "https://api.spotify.com/v1/me/top/tracks?time_range=" + timeRange + "&limit=5&offset=0";
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Authorization", "Bearer " + mAccessToken)
+                .build();
+        TextView songTextView = findViewById(R.id.getTopSongTextView); // The TextView for songs
+        top = "Top Songs";
+
+        mCall = mOkHttpClient.newCall(request);
+        mCall.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("HTTP", "Failed to fetch top songs data: " + e);
+                mainHandler.post(() -> Toast.makeText(getApplicationContext(), "Failed to fetch top songs data, watch Logcat for more details", Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "Server error: " + response);
+                    mainHandler.post(() -> Toast.makeText(getApplicationContext(), "Error fetching top songs data", Toast.LENGTH_SHORT).show());
+                    return;
+                }
+
+                // Process the response for top songs
+                String responseBodyString = response.body().string(); // Get the response body as a string
+                mainHandler.post(() -> {
+                    onGetTopStatsClicked(responseBodyString, songTextView, "Top Songs"); // Pass the response body and the target TextView for songs
+                });
+            }
+        });
+    }
+
+    public void onGetTopStatsClicked(String responseBodyString, TextView targetTextView, String title) {
+        try {
+            JSONObject responseObject = new JSONObject(responseBodyString);
+            JSONArray itemsArray = responseObject.getJSONArray("items");
+            StringBuilder builder = new StringBuilder(title).append("\n\n"); // Use the title parameter here
+            for (int i = 0; i < itemsArray.length(); i++) {
+                JSONObject itemObject = itemsArray.getJSONObject(i);
+                String name = itemObject.getString("name");
+                builder.append(i + 1).append(". ").append(name).append("\n\n");
+            }
+            mainHandler.post(() -> targetTextView.setText(builder.toString())); // Ensure UI updates are posted to the main thread
+        } catch (JSONException e) {
+            Log.e(TAG, "Failed to parse data: " + e);
+            Toast.makeText(getApplicationContext(), "Failed to parse data, watch Logcat for more details", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     /**
      * Get token from Spotify
@@ -187,41 +262,31 @@ public class ApiActivity extends AppCompatActivity {
     }
 
     /**
-     * Get code from Spotify
-     * This method will open the Spotify login activity and get the code
-     * What is code?
-     * https://developer.spotify.com/documentation/general/guides/authorization-guide/
-     */
-    public void getCode() {
-        final AuthorizationRequest request = getAuthenticationRequest(AuthorizationResponse.Type.CODE);
-        AuthorizationClient.openLoginActivity(ApiActivity.this, AUTH_CODE_REQUEST_CODE, request);
-    }
-
-
-    /**
      * When the app leaves this activity to momentarily get a token/code, this function
      * fetches the result of that external activity to get the response from Spotify
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        final AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
 
-        // Check which request code is present (if any)
-        if (AUTH_TOKEN_REQUEST_CODE == requestCode) {
-            mAccessToken = response.getAccessToken();
-            setTextAsync(mAccessToken, tokenTextView);
+        if (data != null && requestCode == AUTH_TOKEN_REQUEST_CODE) {
+            final AuthorizationResponse response = AuthorizationClient.getResponse(resultCode, data);
 
-        } else if (AUTH_CODE_REQUEST_CODE == requestCode) {
-            mAccessCode = response.getCode();
-            setTextAsync(mAccessCode, codeTextView);
+            if (response.getType() == AuthorizationResponse.Type.TOKEN) {
+                mAccessToken = response.getAccessToken();
+
+                if (mAccessToken != null && !mAccessToken.isEmpty()) {
+
+                } else {
+                    Log.e(TAG, "Token is null or empty");
+                }
+            } else if (response.getType() == AuthorizationResponse.Type.ERROR) {
+                Log.e(TAG, "Authentication Error: " + response.getError());
+            }
+        } else {
+            Log.e(TAG, "Intent data is null");
         }
     }
-
-    /**
-     * Get user profile
-     * This method will get the user profile using the token
-     */
 
     /**
      * Creates a UI thread to update a TextView in the background
