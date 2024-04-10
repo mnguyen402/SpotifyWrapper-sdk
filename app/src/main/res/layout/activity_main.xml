@@ -1,54 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
+    android:background="#023020"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/user_details"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/userButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/metallic_gold"
-        android:text="Manage User Information"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/user_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="User Details"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:layout_marginBottom="24dp" />
 
-    <TextView
-        android:id="@+id/SpotifyLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/metallic_gold"
-        android:text="Spotify Login"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/userButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage User Information"
+            android:background="@color/metallic_gold"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
 
-    <TextView
-        android:id="@+id/SummaryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/metallic_gold"
-        android:text="Summary"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/SpotifyLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Spotify Login"
+            android:background="@color/metallic_gold"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
 
-    <Button
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logout" />
+        <TextView
+            android:id="@+id/SummaryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Summary"
+            android:background="@color/metallic_gold"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:padding="12dp"
+            android:layout_marginBottom="24dp" />
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:textColor="#ffffff"
+            android:background="@color/metallic_gold"
+            android:layout_marginBottom="30dp" />
 
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-</LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>
+
+
+
+
+    <!--
+    <?xml version="1.0" encoding="utf-8"?>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <TextView
+            android:id="@+id/user_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello World!" />
+
+        <TextView
+            android:id="@+id/userButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/metallic_gold"
+            android:text="Manage User Information"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/SpotifyLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/metallic_gold"
+            android:text="Spotify Login"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/SummaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/metallic_gold"
+            android:text="Summary"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout" />
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </FrameLayout>
+
+    </LinearLayout>
+    -->
