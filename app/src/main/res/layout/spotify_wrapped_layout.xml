@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -9,8 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="118dp">
 
 
         <LinearLayout
@@ -24,23 +27,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Your 2024 Spotify Wrapped"
+                android:layout_marginBottom="24dp"
                 android:gravity="center"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:text="Your 2024 Spotify Wrapped"
                 android:textColor="@color/metallic_gold"
-                android:layout_marginBottom="24dp"/>
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
 
             <!-- Top Tracks Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Top Songs"
-                android:textSize="24sp"
-                android:textStyle="bold"
                 android:textColor="@color/metallic_gold"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <!-- Placeholders for Top Tracks -->
@@ -52,10 +55,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="1. Track Name "
-                    android:textSize="18sp"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
                 <!-- Add placeholders for tracks 2-5 -->
             </LinearLayout>
 
@@ -64,12 +67,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top Artists"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/metallic_gold"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:text="Top Artists"
+                android:textColor="@color/metallic_gold"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <!-- Placeholders for Top Artists -->
@@ -81,10 +84,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:text="1. Artist Name"
-                    android:textSize="18sp"
                     android:textColor="@color/white"
-                    android:layout_marginBottom="4dp"/>
+                    android:textSize="18sp" />
                 <!-- Add placeholders for artists 2-5 -->
             </LinearLayout>
 
@@ -93,41 +96,41 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Minutes Listened"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/metallic_gold"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:text="Minutes Listened"
+                android:textColor="@color/metallic_gold"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="X,XXX minutes"
-                android:textSize="18sp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="18sp" />
 
 
             <!-- Top Genre Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="Top Genre"
-                android:textSize="24sp"
-                android:textStyle="bold"
                 android:textColor="@color/metallic_gold"
-                android:layout_marginBottom="8dp"/>
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="Genre Name"
-                android:textSize="18sp"
                 android:textColor="@color/white"
-                android:layout_marginBottom="16dp"/>
+                android:textSize="18sp" />
 
 
         </LinearLayout>

@@ -87,21 +87,16 @@ public class ApiActivity extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("dd/ MM");
                 String dateToday = df.format(Calendar.getInstance().getTime());
                 Intent intent = null;
-                switch (dateToday) {
-                    case "24/ 12":
-                        intent = new Intent(getApplicationContext(), ChristmasWrappedActivity.class);
-                        break;
-                    case "01/ 01":
-                        intent = new Intent(getApplicationContext(), NewyearWrappedActivity.class);
-                        break;
-                    case "28/ 10":
-                        intent = new Intent(getApplicationContext(), ThanksgivingWrappedActivity.class);
-                        break;
-                    case "14/ 02":
-                        intent = new Intent(getApplicationContext(), ValentineWrappedActivity.class);
-                        break;
-                    default:
-                        intent = new Intent(getApplicationContext(), SpotifyWrapperActivity.class);
+                if (dateToday == "24/ 12") {
+                    intent = new Intent(getApplicationContext(), ChristmasWrappedActivity.class);
+                } else if (dateToday ==  "01/ 01") {
+                    intent = new Intent(getApplicationContext(), NewYearWrapped.class);
+                } else if (dateToday == "28/ 10") {
+                    intent = new Intent(getApplicationContext(), ThanksGivingWrapped2.class);
+                } else if (dateToday == "14/ 02") {
+                    intent = new Intent(getApplicationContext(), ValentineWrapped.class);
+                } else {
+                    intent = new Intent(getApplicationContext(), SpotifyWrapperActivity.class);
                 }
                 intent.putExtra("topArtist",profileTextView.getText().toString());
                 intent.putExtra("topSong",getTopSongTextView.getText().toString());

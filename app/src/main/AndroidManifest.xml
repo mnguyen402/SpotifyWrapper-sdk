@@ -15,8 +15,20 @@
         android:theme="@style/Theme.Spotifysdk"
         tools:targetApi="31">
         <activity
+            android:name=".PastSpotifySummaryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".NewYearWrapped"
+            android:exported="false" />
+        <activity
+            android:name=".ValentineWrapped"
+            android:exported="false" />
+        <activity
+            android:name=".ThanksGivingWrapped2"
+            android:exported="false" />
+        <activity
             android:name=".Game_Activity"
-            android:exported = "false"/>
+            android:exported="false" />
         <activity
             android:name=".SpotifyWrapperActivity"
             android:exported="false" />
@@ -70,9 +82,8 @@
         </activity>
         <activity
             android:name=".ApiActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity android:name=".ChristmasWrappedActivity" />
-
     </application>
 
 </manifest>

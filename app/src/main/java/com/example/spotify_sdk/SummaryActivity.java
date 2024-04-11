@@ -13,26 +13,32 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SummaryActivity extends AppCompatActivity {
-    TextView saveslot1, saveslot2, saveslot3, saveslot4;
+    Button saveslot1, saveslot2, saveslot3, saveslot4;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
     FirebaseUser user;
+    TextView topArtist, topSong, Genre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
-        saveslot1 = findViewById(R.id.saveslot1);
-        saveslot2 = findViewById(R.id.saveslot2);
-        saveslot3 = findViewById(R.id.saveslot3);
-        saveslot4 = findViewById(R.id.saveslot4);
+        saveslot1 = findViewById(R.id.saveSlot1);
+        saveslot2 = findViewById(R.id.saveSlot2);
+        saveslot3 = findViewById(R.id.saveSlot3);
+        saveslot4 = findViewById(R.id.saveSlot4);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = mAuth.getCurrentUser();
+        topArtist = findViewById(R.id.topArtistTextView);
+        topSong = findViewById(R.id.topSongTextView);
+        Genre = findViewById(R.id.topGenreTextView);
+        TextView summary = findViewById(R.id.SummaryTitle);
 
         Button backBth = findViewById(R.id.backBtn);
         backBth.setOnClickListener(new View.OnClickListener() {
@@ -43,22 +49,108 @@ public class SummaryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        DocumentReference docRef = db.collection("users").document("saveslot1");
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        saveslot1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        saveslot1.setText(document.get("TopArtist").toString() + "\n" + document.get("TopSong").toString() + "\n" + document.get("TopGenres").toString());
-                    } else {
-                        Toast.makeText(SummaryActivity.this, "Save Slot is empty", Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                CollectionReference ColRef = db.collection("users")
+                        .document(mAuth.getUid().toString())
+                        .collection("save");
+                ColRef.document("saveslot1").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                topArtist.setText(document.get("topArtist").toString());
+                                topSong.setText(document.get("topSong").toString());
+                                Genre.setText(document.get("Genre").toString());
+                            } else {
+                                Toast.makeText(SummaryActivity.this, "Save Slot is empty", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SummaryActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                } else {
-                    Toast.makeText(SummaryActivity.this, task.getException().getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }
+                });
+            }
+        });
+        saveslot2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CollectionReference ColRef = db.collection("users")
+                        .document(mAuth.getUid().toString())
+                        .collection("save");
+                ColRef.document("saveslot2").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                topArtist.setText(document.get("topArtist").toString());
+                                topSong.setText(document.get("topSong").toString());
+                                Genre.setText(document.get("Genre").toString());
+                            } else {
+                                Toast.makeText(SummaryActivity.this, "Save Slot is empty", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SummaryActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+        saveslot3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CollectionReference ColRef = db.collection("users")
+                        .document(mAuth.getUid().toString())
+                        .collection("save");
+                ColRef.document("saveslot3").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                topArtist.setText(document.get("topArtist").toString());
+                                topSong.setText(document.get("topSong").toString());
+                                Genre.setText(document.get("Genre").toString());
+                            } else {
+                                Toast.makeText(SummaryActivity.this, "Save Slot is empty", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SummaryActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+        saveslot4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CollectionReference ColRef = db.collection("users")
+                        .document(mAuth.getUid().toString())
+                        .collection("save");
+                ColRef.document("saveslot4").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                topArtist.setText(document.get("topArtist").toString());
+                                topSong.setText(document.get("topSong").toString());
+                                Genre.setText(document.get("Genre").toString());
+                            } else {
+                                Toast.makeText(SummaryActivity.this, "Save Slot is empty", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(SummaryActivity.this, task.getException().getMessage(),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
     }

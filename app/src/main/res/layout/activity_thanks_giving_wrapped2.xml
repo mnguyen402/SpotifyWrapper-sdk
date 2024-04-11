@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SpotifyWrapperActivity">
+    android:background="@color/sea_green"
+    tools:context=".ThanksGivingWrapped2">
 
     <TextView
         android:id="@+id/topSongTextView"
@@ -39,67 +40,70 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topArtistTextView"
-        app:layout_constraintVertical_bias="0.734" />
+        app:layout_constraintTop_toBottomOf="@+id/topSongTextView" />
+
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="THANKSGIVING WRAPPED 2024"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/thanksgivingImage"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/thanksgiving"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
     <Button
-        android:id="@+id/saveSlot1Btn"
+        android:id="@+id/ThanksGivingBtn1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="Save 1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saveSlot2Btn"
+        app:layout_constraintEnd_toStartOf="@+id/ThanksGivingBtn2"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/saveSlot2Btn"
+        android:id="@+id/ThanksGivingBtn2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="Save 2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saveSlot3Btn"
-        app:layout_constraintStart_toEndOf="@+id/saveSlot1Btn" />
+        app:layout_constraintEnd_toStartOf="@+id/ThanksGivingBtn3"
+        app:layout_constraintStart_toEndOf="@+id/ThanksGivingBtn1" />
 
     <Button
-        android:id="@+id/saveSlot3Btn"
+        android:id="@+id/ThanksGivingBtn3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="Save 3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/saveSlot4Btn"
-        app:layout_constraintStart_toEndOf="@+id/saveSlot2Btn" />
+        app:layout_constraintEnd_toStartOf="@+id/ThanksGivingBtn4"
+        app:layout_constraintStart_toEndOf="@+id/ThanksGivingBtn2" />
 
     <Button
-        android:id="@+id/saveSlot4Btn"
+        android:id="@+id/ThanksGivingBtn4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:text="Save 4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/saveSlot3Btn" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/download"
-        tools:layout_editor_absoluteY="104dp" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SPOTIFY WRAPPER"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintStart_toEndOf="@+id/ThanksGivingBtn3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
