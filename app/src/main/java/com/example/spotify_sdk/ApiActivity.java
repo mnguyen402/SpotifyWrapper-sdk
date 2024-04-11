@@ -1,18 +1,17 @@
 package com.example.spotify_sdk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
@@ -55,6 +54,15 @@ public class ApiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.api_layout);
+        Button backBth = findViewById(R.id.backBtn);
+        backBth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to navigate to the Login activity
+                Intent intent = new Intent(ApiActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         // Initialize the handler with the main looper
         mainHandler = new Handler(Looper.getMainLooper());

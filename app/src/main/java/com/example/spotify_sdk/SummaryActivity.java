@@ -1,11 +1,13 @@
 package com.example.spotify_sdk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +33,16 @@ public class SummaryActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         user = mAuth.getCurrentUser();
+
+        Button backBth = findViewById(R.id.backBtn);
+        backBth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to navigate to the Login activity
+                Intent intent = new Intent(SummaryActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         DocumentReference docRef = db.collection("users").document("saveslot1");
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
