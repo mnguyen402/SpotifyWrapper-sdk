@@ -8,6 +8,42 @@
 
 
     <TextView
+        android:id="@+id/topSongTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:text="Top Song"
+        app:layout_constraintBottom_toTopOf="@+id/topGenreTextView"
+        app:layout_constraintEnd_toStartOf="@+id/topArtistTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/topArtistTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="5dp"
+        android:text="Top Artist"
+        app:layout_constraintBottom_toTopOf="@+id/topGenreTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/topSongTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/topGenreTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Top Genre"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topArtistTextView"
+        app:layout_constraintVertical_bias="0.734" />
+
+    <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,85 +66,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"/>
-
-    <FrameLayout
-        android:id="@+id/containerTopArtists"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/santaImage"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/topArtists"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Top Artists"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/containerTopSongs"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/containerTopArtists"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/topSongs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Top Songs"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/containerMinutesPlayed"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/containerTopSongs"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/minutesPlayed"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Minutes Played: 5000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold" />
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/containerTopGenre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@+id/containerMinutesPlayed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp"
-        android:padding="8dp">
-
-        <TextView
-            android:id="@+id/topGenre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Top Genre: Festive"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textStyle="bold" />
-    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

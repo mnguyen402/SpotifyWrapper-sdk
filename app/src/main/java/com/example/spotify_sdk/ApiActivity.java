@@ -23,6 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -73,7 +76,25 @@ public class ApiActivity extends AppCompatActivity {
 
         spotifyWrapperBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SpotifyWrapperActivity.class);
+                DateFormat df = new SimpleDateFormat("dd/ MM");
+                String dateToday = df.format(Calendar.getInstance().getTime());
+                Intent intent = null;
+                switch (dateToday) {
+                    case "24/ 12":
+                        intent = new Intent(getApplicationContext(), ChristmasWrappedActivity.class);
+                        break;
+                    case "01/ 01":
+                        intent = new Intent(getApplicationContext(), NewyearWrappedActivity.class);
+                        break;
+                    case "28/ 10":
+                        intent = new Intent(getApplicationContext(), ThanksgivingWrappedActivity.class);
+                        break;
+                    case "14/ 02":
+                        intent = new Intent(getApplicationContext(), ValentineWrappedActivity.class);
+                        break;
+                    default:
+                        intent = new Intent(getApplicationContext(), SpotifyWrapperActivity.class);
+                }
                 intent.putExtra("topArtist",profileTextView.getText().toString());
                 intent.putExtra("topSong",getTopSongTextView.getText().toString());
                 startActivity(intent);
