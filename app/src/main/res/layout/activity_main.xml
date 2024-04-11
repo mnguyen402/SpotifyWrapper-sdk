@@ -15,6 +15,8 @@
         android:gravity="center"
         android:layout_gravity="center">
 
+
+
         <TextView
             android:id="@+id/user_details"
             android:layout_width="wrap_content"
@@ -61,13 +63,26 @@
             android:layout_marginBottom="24dp" />
 
         <Button
+            android:id="@+id/gameButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/metallic_gold"
+            android:text="Play Game"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            android:padding="12dp"
+            app:cornerRadius="2dp"
+            android:layout_marginBottom="24dp" />
+
+        <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:textColor="#ffffff"
+            android:layout_marginBottom="30dp"
             android:background="@color/metallic_gold"
-            android:layout_marginBottom="30dp" />
+            android:text="@string/logout"
+            android:textColor="#ffffff" />
+
 
         <FrameLayout
             android:id="@+id/fragment_container"

@@ -1,12 +1,12 @@
 package com.example.spotify_sdk;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else {
-            textView.setText(user.getEmail() + "\n" + "My mind telling me no");
+            textView.setText(user.getEmail());
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +72,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), ApiActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        Button playGame = findViewById(R.id.gameButton);
+        playGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Intent to navigate to the Login activity
+                Intent intent = new Intent(MainActivity.this, Game_Activity.class);
+                startActivity(intent);
             }
         });
 
