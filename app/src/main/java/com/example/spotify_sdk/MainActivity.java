@@ -12,6 +12,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class MainActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
@@ -40,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else {
-            textView.setText(user.getEmail() + "\n" + "My mind telling me no");
+            DateFormat df = new SimpleDateFormat("dd/ MM");
+            String dateToday = df.format(Calendar.getInstance().getTime());
+            textView.setText(user.getEmail() + "\n" + dateToday);
         }
         button.setOnClickListener(new View.OnClickListener() {
             @Override

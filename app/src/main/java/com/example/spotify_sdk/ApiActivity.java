@@ -87,6 +87,7 @@ public class ApiActivity extends AppCompatActivity {
                 DateFormat df = new SimpleDateFormat("dd/ MM");
                 String dateToday = df.format(Calendar.getInstance().getTime());
                 Intent intent = null;
+                dateToday = "28/ 10";
                 if (dateToday == "24/ 12") {
                     intent = new Intent(getApplicationContext(), ChristmasWrappedActivity.class);
                 } else if (dateToday ==  "01/ 01") {
